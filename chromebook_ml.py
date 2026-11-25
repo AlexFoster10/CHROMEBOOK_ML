@@ -5,6 +5,7 @@ from sklearn import tree, preprocessing
 from sklearn.metrics import accuracy_score
 df = pandas.read_csv('data.csv')
 
+
 le = preprocessing.LabelEncoder()
 
 
@@ -18,14 +19,17 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 dtree = tree.DecisionTreeClassifier()
 dtree = dtree.fit(X_train, y_train)
 
-# predictions = dtree.predict(X_train)
-
-
-# dtree_acc = accuracy_score(y_train, predictions)
-# print("Decision Tree Accuracy TRAIN: ", dtree_acc)
 
 predictions = dtree.predict(X_test)
 
 
 dtree_acc = accuracy_score(y_test, predictions)
 print("Decision Tree Accuracy TEST: ", dtree_acc)
+
+pred_2 = dtree.predict(X)
+
+df['PREDICTION'] = pred_2
+
+df.to_csv('predictions.csv', index=False)
+
+print(df)
